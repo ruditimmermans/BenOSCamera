@@ -12,6 +12,7 @@ import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.MotionEvent
 import android.view.InputDevice
+import android.view.WindowManager
 import android.widget.SeekBar
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         viewBinding.videoCaptureButton.setOnClickListener { captureVideo() }
         viewBinding.qrButton.setOnClickListener { toggleQrScanner() }
         viewBinding.switchCameraButton.setOnClickListener { switchCamera() }
+        viewBinding.flashButton.setOnClickListener { toggleFlashMode() }
         viewBinding.galleryButton.setOnClickListener { openGallery() }
         viewBinding.settingsButton.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
@@ -102,6 +104,7 @@ class MainActivity : AppCompatActivity() {
         barcodeScanner = BarcodeScanning.getClient(options)
         
         updateQrIcon()
+        updateFlashIcon()
         setupZoom()
         
         checkForUpdates()
@@ -184,6 +187,7 @@ class MainActivity : AppCompatActivity() {
 
         viewBinding.settingsButton.imageTintList = colorStateList
         viewBinding.switchCameraButton.imageTintList = colorStateList
+        viewBinding.flashButton.imageTintList = colorStateList
         viewBinding.galleryButton.imageTintList = colorStateList
         
         if (recording == null) {
@@ -312,6 +316,40 @@ class MainActivity : AppCompatActivity() {
         viewBinding.qrButton.imageTintList = ColorStateList.valueOf(color)
     }
 
+    private fun toggleFlashMode() {
+        flashMode = when (flashMode) {
+            ImageCapture.FLASH_MODE_OFF -> ImageCapture.FLASH_MODE_ON
+            ImageCapture.FLASH_MODE_ON -> ImageCapture.FLASH_MODE_AUTO
+            else -> ImageCapture.FLASH_MODE_OFF
+        }
+        
+        val flashValue = when (flashMode) {
+            ImageCapture.FLASH_MODE_ON -> "1"
+            ImageCapture.FLASH_MODE_AUTO -> "2"
+            else -> "0"
+        }
+        
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPrefs.edit().putString(KEY_FLASH_MODE, flashValue).apply()
+        
+        imageCapture?.flashMode = flashMode
+        updateFlashIcon()
+        
+        // If recording video, toggle torch
+        if (recording != null) {
+            camera?.cameraControl?.enableTorch(flashMode == ImageCapture.FLASH_MODE_ON)
+        }
+    }
+
+    private fun updateFlashIcon() {
+        val iconRes = when (flashMode) {
+            ImageCapture.FLASH_MODE_ON -> R.drawable.ic_flash_on
+            ImageCapture.FLASH_MODE_AUTO -> R.drawable.ic_flash_auto
+            else -> R.drawable.ic_flash_off
+        }
+        viewBinding.flashButton.setImageResource(iconRes)
+    }
+
     private fun switchCamera() {
         lensFacing = if (CameraSelector.LENS_FACING_FRONT == lensFacing) {
             CameraSelector.LENS_FACING_BACK
@@ -436,6 +474,10 @@ class MainActivity : AppCompatActivity() {
             .start(ContextCompat.getMainExecutor(this)) { recordEvent ->
                 when (recordEvent) {
                     is VideoRecordEvent.Start -> {
+                        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                        if (flashMode == ImageCapture.FLASH_MODE_ON) {
+                            camera?.cameraControl?.enableTorch(true)
+                        }
                         viewBinding.videoCaptureButton.apply {
                             setImageResource(R.drawable.ic_stop)
                             imageTintList = ColorStateList.valueOf(Color.RED)
@@ -465,6 +507,8 @@ class MainActivity : AppCompatActivity() {
                             recording = null
                             Log.e("MainActivity", "Video capture ends with error: ${recordEvent.error}")
                         }
+                        window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                        camera?.cameraControl?.enableTorch(false)
                         viewBinding.videoCaptureButton.apply {
                             setImageResource(R.drawable.ic_videocam)
                             val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this@MainActivity)

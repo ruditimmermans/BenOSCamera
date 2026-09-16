@@ -5,14 +5,6 @@
 
         <ListPreference
             app:defaultValue="0"
-            app:entries="@array/flash_modes"
-            app:entryValues="@array/flash_values"
-            app:key="flash_mode"
-            app:title="@string/flash_mode_title"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="0"
             app:entries="@array/aspect_ratios"
             app:entryValues="@array/aspect_ratio_values"
             app:key="aspect_ratio"

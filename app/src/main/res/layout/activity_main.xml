@@ -86,6 +86,22 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@android:color/white" />
 
+        <ImageButton
+            android:id="@+id/flashButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/flash_mode_title"
+            android:focusable="false"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_flash_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageCaptureButton"
+            app:layout_constraintStart_toEndOf="@id/switchCameraButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@android:color/white" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/imageCaptureButton"
             android:layout_width="wrap_content"
