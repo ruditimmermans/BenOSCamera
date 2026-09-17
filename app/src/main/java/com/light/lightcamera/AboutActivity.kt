@@ -35,6 +35,15 @@ class AboutActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.no_app_to_open_url, Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.reportIssuesButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, getString(R.string.report_issues_url).toUri())
+            try {
+                startActivity(intent)
+            } catch (_: Exception) {
+                Toast.makeText(this, R.string.no_app_to_open_url, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

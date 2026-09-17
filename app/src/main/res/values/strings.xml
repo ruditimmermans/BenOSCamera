@@ -16,11 +16,13 @@
     <string name="aspect_ratio_4_3">4:3</string>
     <string name="aspect_ratio_16_9">16:9</string>
     <string name="about">About</string>
-    <string name="copyright">Copyright 2026 by BenOS</string>
+    <string name="copyright">Copyright 2026&#8211;2027 By Rudi Timmermans and BenOS</string>
     <string name="license_text">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License or (at your option) any later version. \n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for more details. \n\nYou should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses.</string>
     <string name="version_format">Version: %1$s</string>
     <string name="donate">Donate</string>
     <string name="donate_url">https://ko-fi.com/ben9412345</string>
+    <string name="report_issues">Report Issues</string>
+    <string name="report_issues_url">https://github.com/ruditimmermans/BenOSCamera/issues</string>
     <string name="open_with">Open with</string>
     <string name="change_button_color">Button Color</string>
     <string name="select_color">Select Color</string>

@@ -60,6 +60,9 @@ class MainActivity : AppCompatActivity() {
     private var lensFacing = CameraSelector.LENS_FACING_BACK
     private var screenAspectRatio = AspectRatio.RATIO_4_3
     private var lastPhotoTime = 0L
+    private var isZoomSeekBarTouching = false
+    private var lastZoomTime = 0L
+    private val ZOOM_THROTTLE_MS = 10L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -266,10 +269,15 @@ class MainActivity : AppCompatActivity() {
     private fun setupZoom() {
         val listener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
             override fun onScale(detector: ScaleGestureDetector): Boolean {
-                val currentZoomRatio = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
-                val delta = detector.scaleFactor
-                camera?.cameraControl?.setZoomRatio(currentZoomRatio * delta)
-                return true
+                val currentTime = System.currentTimeMillis()
+                if (currentTime - lastZoomTime > ZOOM_THROTTLE_MS) {
+                    val currentZoomRatio = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
+                    val delta = detector.scaleFactor
+                    camera?.cameraControl?.setZoomRatio(currentZoomRatio * delta)
+                    lastZoomTime = currentTime
+                    return true
+                }
+                return false
             }
         }
         val scaleGestureDetector = ScaleGestureDetector(this, listener)
@@ -293,11 +301,21 @@ class MainActivity : AppCompatActivity() {
         viewBinding.zoomSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    camera?.cameraControl?.setLinearZoom(progress / 100f)
+                    val currentTime = System.currentTimeMillis()
+                    if (currentTime - lastZoomTime > ZOOM_THROTTLE_MS) {
+                        camera?.cameraControl?.setLinearZoom(progress / 1000f)
+                        lastZoomTime = currentTime
+                    }
                 }
             }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                isZoomSeekBarTouching = true
+            }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                isZoomSeekBarTouching = false
+                // Ensure final value is applied
+                camera?.cameraControl?.setLinearZoom(viewBinding.zoomSeekBar.progress / 1000f)
+            }
         })
     }
 
@@ -566,7 +584,9 @@ class MainActivity : AppCompatActivity() {
                 )
                 
                 camera?.cameraInfo?.zoomState?.observe(this) { zoomState ->
-                    viewBinding.zoomSeekBar.progress = (zoomState.linearZoom * 100).toInt()
+                    if (!isZoomSeekBarTouching) {
+                        viewBinding.zoomSeekBar.progress = (zoomState.linearZoom * 1000).toInt()
+                    }
                 }
                 viewBinding.zoomSeekBar.visibility = View.VISIBLE
             } catch (exc: Exception) {
