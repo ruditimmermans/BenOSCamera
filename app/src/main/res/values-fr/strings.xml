@@ -1,0 +1,110 @@
+<resources>
+    <string name="app_name">Caméra BenOS</string>
+    <string name="take_photo">Photo</string>
+    <string name="record_video">Enregistrer</string>
+    <string name="stop_video">Arrêt</string>
+    <string name="open_videos">Vidéos</string>
+    <string name="scan_qr">Scanner le code QR</string>
+    <string name="switch_camera">Changer de caméra</string>
+    <string name="gallery">Galerie</string>
+
+    <string name="scanned_result">Numérisé : %1$s</string>
+    <string name="flash_off">Flash désactivé</string>
+    <string name="flash_on">Flash activé</string>
+    <string name="flash_auto">Flash automatique</string>
+    <string name="aspect_ratio_4_3">4:3</string>
+    <string name="aspect_ratio_16_9">16:9</string>
+    <string name="about">À propos</string>
+    <string name="copyright">Copyright 2026–2027 Par Rudi Timmermans et BenOS</string>
+    <string name="license_text">Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence Publique Générale GNU telle que publiée par la Free Software Foundation, soit la version 3 de la Licence, soit (à votre choix) toute version ultérieure. \n\nCe programme est distribué dans l\'espoir qu\'il sera utile, mais SANS AUCUNE GARANTIE ; sans même la garantie implicite de qualité marchande ou d’adéquation à un usage particulier. Consultez la licence publique générale GNU pour plus de détails. \n\nVous devriez avoir reçu une copie de la licence publique générale GNU avec ce programme. Sinon, consultez http://www.gnu.org/licenses.</string>
+    <string name="version_format">Version : %1$s</string>
+    <string name="unknown">Inconnu</string>
+    <string name="permission_denied">Autorisations non accordées par l\'utilisateur.</string>
+    <string name="donate">Faire un don à BenOS</string>
+    <string name="donate_url">https://ko-fi.com/ben9412345</string>
+    <string name="donate_paypal">Faites un don au développeur via PayPal</string>
+    <string name="donate_paypal_url">https://www.paypal.com/paypalme/benoscamera</string>
+    <string name="report_issues">Signaler des problèmes</string>
+    <string name="report_issues_url">https://github.com/ruditimmermans/BenOSCamera/issues</string>
+    <string name="open_with">Ouvrir avec</string>
+    <string name="change_button_color">Couleur du bouton</string>
+    <string name="select_color">Sélectionnez la couleur</string>
+    <string name="custom_color">Coutume...</string>
+    <string name="enter_hex_color">Entrez la couleur hexadécimale (par exemple, #FF0000)</string>
+    <string name="invalid_color">Format de couleur invalide</string>
+    <string name="color_updated">Couleur mise à jour</string>
+    <string name="color_white">Blanc</string>
+    <string name="color_red">Rouge</string>
+    <string name="color_green">Vert</string>
+    <string name="color_blue">Bleu</string>
+    <string name="color_yellow">Jaune</string>
+    <string name="color_cyan">Cyan</string>
+    <string name="color_magenta">Magenta</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_purple">Violet</string>
+
+    <string name="settings">Paramètres</string>
+    <string name="flash_mode_title">Mode Flash</string>
+    <string name="flash_mode_summary">Définir le mode flash par défaut</string>
+    <string name="button_color_title">Couleur du bouton</string>
+    <string name="button_color_summary">Choisissez la couleur des boutons de l\'interface utilisateur</string>
+    <string name="aspect_ratio_title">Rapport hauteur/largeur</string>
+    <string name="aspect_ratio_summary">Choisissez le rapport hauteur/largeur de la caméra</string>
+    <string name="tap_to_take_photo_title">Appuyez pour prendre une photo</string>
+    <string name="tap_to_take_photo_summary">Prendre une photo en cliquant sur l\'écran</string>
+    <string name="auto_zoom_title">Zoom automatique</string>
+    <string name="auto_zoom_summary">Zoom automatique lorsqu\'un visage ou un objet est détecté</string>
+
+    <string name="no_app_to_open_photo">Aucune application pour ouvrir la photo</string>
+
+    <string-array name="flash_modes">
+        <item>Désactivé</item>
+        <item>Sur</item>
+        <item>Auto</item>
+    </string-array>
+
+    <string-array name="flash_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="aspect_ratios">
+        <item>4:3</item>
+        <item>16:9</item>
+    </string-array>
+
+    <string-array name="aspect_ratio_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string name="no_app_to_open_video">Aucune application pour ouvrir la vidéo</string>
+    <string name="no_app_to_open_url">Aucune application trouvée pour ouvrir l\'URL</string>
+    <string name="photo_captured">Photo prise à %1$s</string>
+
+    <string name="check_for_updates">Vérifier les mises à jour</string>
+    <string name="checking_updates">Vérification des mises à jour...</string>
+    <string name="update_available">Mise à jour disponible : %1$s</string>
+    <string name="update_not_available">Votre application est à jour.</string>
+    <string name="update_error">Erreur lors de la vérification des mises à jour.</string>
+    <string name="download_update">Télécharger</string>
+
+    <string name="auto_check_updates_title">Vérification automatique des mises à jour</string>
+    <string name="auto_check_updates_summary">Rechercher automatiquement les nouvelles versions au démarrage</string>
+
+    <string name="storage_location_title">Emplacement de stockage</string>
+    <string name="storage_location_summary">Choisissez où enregistrer les photos et les vidéos</string>
+    <string-array name="storage_locations">
+        <item>Stockage interne</item>
+        <item>Carte SD</item>
+    </string-array>
+    <string-array name="storage_location_values">
+        <item>interne</item>
+        <item>sd_card</item>
+    </string-array>
+
+    <string name="category_camera_settings">Paramètres de la caméra</string>
+    <string name="category_appearance">Apparence</string>
+    <string name="category_info">Infos</string>
+    <string name="about_summary">Version de l\'application et informations sur la licence</string>
+</resources>

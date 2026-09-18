@@ -8,7 +8,6 @@
     <string name="switch_camera">Camera wisselen</string>
     <string name="gallery">Gallerij</string>
 
-
     <string name="scanned_result">Gescand: %1$s</string>
     <string name="flash_off">Flitser uit</string>
     <string name="flash_on">Flitser aan</string>
@@ -17,10 +16,14 @@
     <string name="aspect_ratio_16_9">16:9</string>
     <string name="about">Over</string>
     <string name="copyright">Copyright 2026&#8211;2027 door Rudi Timmermans en BenOS</string>
-    <string name="license_text">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License or (at your option) any later version. \n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for more details. \n\nYou should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses.</string>
+    <string name="license_text">Dit programma is vrije software: u kunt het herdistribueren en/of wijzigen onder de voorwaarden van de GNU General Public License zoals gepubliceerd door de Free Software Foundation, ofwel versie 3 van de Licentie, of (naar uw keuze) elke latere versie. \n\nDit programma wordt gedistribueerd in de hoop dat het nuttig zal zijn, maar ZONDER ENIGE GARANTIE; zelfs zonder de impliciete garantie van verkoopbaarheid of geschiktheid voor een bepaald doel. Zie de GNU General Public License voor meer details. \n\nU zou een kopie van de GNU General Public License moeten hebben ontvangen samen met dit programma. Indien dit niet het geval is, zie http://www.gnu.org/licenses.</string>
     <string name="version_format">Versie: %1$s</string>
-    <string name="donate">Doneren</string>
+    <string name="unknown">Onbekend</string>
+    <string name="permission_denied">Machtigingen niet verleend door de gebruiker.</string>
+    <string name="donate">Doneer aan BenOS</string>
     <string name="donate_url">https://ko-fi.com/ben9412345</string>
+    <string name="donate_paypal">Doneer aan de ontwikkelaar via PayPal</string>
+    <string name="donate_paypal_url">https://www.paypal.com/paypalme/benoscamera</string>
     <string name="report_issues">Problemen melden</string>
     <string name="report_issues_url">https://github.com/ruditimmermans/BenOSCamera/issues</string>
     <string name="open_with">Openen met</string>
@@ -80,4 +83,9 @@
         <item>Interne opslag</item>
         <item>SD-kaart</item>
     </string-array>
+
+    <string name="category_camera_settings">Camera-instellingen</string>
+    <string name="category_appearance">Uiterlijk</string>
+    <string name="category_info">Info</string>
+    <string name="about_summary">App-versie en licentie-informatie</string>
 </resources>

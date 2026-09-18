@@ -22,13 +22,22 @@ class AboutActivity : AppCompatActivity() {
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
             packageInfo.versionName
         } catch (_: Exception) {
-            "Unknown"
+            getString(R.string.unknown)
         }
 
         binding.versionText.text = getString(R.string.version_format, versionName)
 
         binding.donateButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, getString(R.string.donate_url).toUri())
+            try {
+                startActivity(intent)
+            } catch (_: Exception) {
+                Toast.makeText(this, R.string.no_app_to_open_url, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.donatePaypalButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, getString(R.string.donate_paypal_url).toUri())
             try {
                 startActivity(intent)
             } catch (_: Exception) {

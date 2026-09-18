@@ -61,8 +61,6 @@ class MainActivity : AppCompatActivity() {
     private var screenAspectRatio = AspectRatio.RATIO_4_3
     private var lastPhotoTime = 0L
     private var isZoomSeekBarTouching = false
-    private var lastZoomTime = 0L
-    private val ZOOM_THROTTLE_MS = 10L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -154,7 +152,7 @@ class MainActivity : AppCompatActivity() {
                 startCamera()
             } else {
                 Toast.makeText(this,
-                    "Permissions not granted by the user.",
+                    R.string.permission_denied,
                     Toast.LENGTH_SHORT).show()
                 finish()
             }
@@ -269,15 +267,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupZoom() {
         val listener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
             override fun onScale(detector: ScaleGestureDetector): Boolean {
-                val currentTime = System.currentTimeMillis()
-                if (currentTime - lastZoomTime > ZOOM_THROTTLE_MS) {
-                    val currentZoomRatio = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
-                    val delta = detector.scaleFactor
-                    camera?.cameraControl?.setZoomRatio(currentZoomRatio * delta)
-                    lastZoomTime = currentTime
-                    return true
-                }
-                return false
+                val currentZoomRatio = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
+                val delta = detector.scaleFactor
+                camera?.cameraControl?.setZoomRatio(currentZoomRatio * delta)
+                return true
             }
         }
         val scaleGestureDetector = ScaleGestureDetector(this, listener)
@@ -301,11 +294,7 @@ class MainActivity : AppCompatActivity() {
         viewBinding.zoomSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    val currentTime = System.currentTimeMillis()
-                    if (currentTime - lastZoomTime > ZOOM_THROTTLE_MS) {
-                        camera?.cameraControl?.setLinearZoom(progress / 1000f)
-                        lastZoomTime = currentTime
-                    }
+                    camera?.cameraControl?.setLinearZoom(progress / 1000f)
                 }
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {

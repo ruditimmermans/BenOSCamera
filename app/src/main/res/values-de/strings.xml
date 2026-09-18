@@ -1,0 +1,110 @@
+<resources>
+    <string name="app_name">BenOS-Kamera</string>
+    <string name="take_photo">Foto</string>
+    <string name="record_video">Aufzeichnen</string>
+    <string name="stop_video">Stoppen</string>
+    <string name="open_videos">Videos</string>
+    <string name="scan_qr">QR-Code scannen</string>
+    <string name="switch_camera">Kamera wechseln</string>
+    <string name="gallery">Galerie</string>
+
+    <string name="scanned_result">Gescannt: %1$s</string>
+    <string name="flash_off">Blitz aus</string>
+    <string name="flash_on">Blitz an</string>
+    <string name="flash_auto">Blitz automatisch</string>
+    <string name="aspect_ratio_4_3">4:3</string>
+    <string name="aspect_ratio_16_9">16:9</string>
+    <string name="about">Über</string>
+    <string name="copyright">Copyright 2026–2027 von Rudi Timmermans und BenOS</string>
+    <string name="license_text">Dieses Programm ist freie Software: Sie können es unter den Bedingungen der GNU General Public License, wie von der Free Software Foundation veröffentlicht, entweder Version 3 der Lizenz oder (nach Ihrer Wahl) einer späteren Version weiterverbreiten und/oder ändern. \n\nDieses Programm wird in der Hoffnung verbreitet, dass es nützlich ist, jedoch OHNE JEGLICHE GARANTIE; ohne die stillschweigende Garantie der Marktgängigkeit oder Eignung für einen bestimmten Zweck. Weitere Einzelheiten finden Sie in der GNU General Public License. \n\nSie sollten zusammen mit diesem Programm eine Kopie der GNU General Public License erhalten haben. Wenn nicht, siehe http://www.gnu.org/licenses.</string>
+    <string name="version_format">Version: %1$s</string>
+    <string name="unknown">Unbekannt</string>
+    <string name="permission_denied">Berechtigungen wurden vom Benutzer nicht erteilt.</string>
+    <string name="donate">An BenOS spenden</string>
+    <string name="donate_url">https://ko-fi.com/ben9412345</string>
+    <string name="donate_paypal">Spenden Sie über PayPal an den Entwickler</string>
+    <string name="donate_paypal_url">https://www.paypal.com/paypalme/benoscamera</string>
+    <string name="report_issues">Probleme melden</string>
+    <string name="report_issues_url">https://github.com/ruditimmermans/BenOSCamera/issues</string>
+    <string name="open_with">Öffnen mit</string>
+    <string name="change_button_color">Schaltflächenfarbe</string>
+    <string name="select_color">Farbe auswählen</string>
+    <string name="custom_color">Benutzerdefiniert...</string>
+    <string name="enter_hex_color">Hex-Farbe eingeben (z. B. #FF0000)</string>
+    <string name="invalid_color">Ungültiges Farbformat</string>
+    <string name="color_updated">Farbe aktualisiert</string>
+    <string name="color_white">Weiß</string>
+    <string name="color_red">Rot</string>
+    <string name="color_green">Grün</string>
+    <string name="color_blue">Blau</string>
+    <string name="color_yellow">Gelb</string>
+    <string name="color_cyan">Cyan</string>
+    <string name="color_magenta">Magenta</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_purple">Lila</string>
+
+    <string name="settings">Einstellungen</string>
+    <string name="flash_mode_title">Blitzmodus</string>
+    <string name="flash_mode_summary">Standard-Blitzmodus festlegen</string>
+    <string name="button_color_title">Schaltflächenfarbe</string>
+    <string name="button_color_summary">Farbe der UI-Schaltflächen wählen</string>
+    <string name="aspect_ratio_title">Seitenverhältnis</string>
+    <string name="aspect_ratio_summary">Seitenverhältnis der Kamera wählen</string>
+    <string name="tap_to_take_photo_title">Tippen für Foto</string>
+    <string name="tap_to_take_photo_summary">Ein Foto aufnehmen, wenn auf den Bildschirm geklickt wird</string>
+    <string name="auto_zoom_title">Automatischer Zoom</string>
+    <string name="auto_zoom_summary">Automatischer Zoom, wenn ein Gesicht oder Objekt erkannt wird</string>
+
+    <string name="no_app_to_open_photo">Keine App zum Öffnen des Fotos gefunden</string>
+
+    <string-array name="flash_modes">
+        <item>Aus</item>
+        <item>An</item>
+        <item>Auto</item>
+    </string-array>
+
+    <string-array name="flash_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="aspect_ratios">
+        <item>4:3</item>
+        <item>16:9</item>
+    </string-array>
+
+    <string-array name="aspect_ratio_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string name="no_app_to_open_video">Keine App zum Öffnen von Videos gefunden</string>
+    <string name="no_app_to_open_url">Keine App zum Öffnen der URL gefunden</string>
+    <string name="photo_captured">Foto aufgenommen um %1$s</string>
+
+    <string name="check_for_updates">Nach Updates suchen</string>
+    <string name="checking_updates">Suche nach Updates...</string>
+    <string name="update_available">Update verfügbar: %1$s</string>
+    <string name="update_not_available">Ihre App ist auf dem neuesten Stand.</string>
+    <string name="update_error">Fehler bei der Suche nach Updates.</string>
+    <string name="download_update">Herunterladen</string>
+
+    <string name="auto_check_updates_title">Automatische Update-Prüfung</string>
+    <string name="auto_check_updates_summary">Beim Start automatisch nach neuen Versionen suchen</string>
+
+    <string name="storage_location_title">Speicherort</string>
+    <string name="storage_location_summary">Wählen Sie aus, wo Fotos und Videos gespeichert werden sollen</string>
+    <string-array name="storage_locations">
+        <item>Interner Speicher</item>
+        <item>SD-Karte</item>
+    </string-array>
+    <string-array name="storage_location_values">
+        <item>intern</item>
+        <item>sd_card</item>
+    </string-array>
+
+    <string name="category_camera_settings">Kamera-Einstellungen</string>
+    <string name="category_appearance">Erscheinungsbild</string>
+    <string name="category_info">Info</string>
+    <string name="about_summary">App-Version und Lizenzinformationen</string>
+</resources>
