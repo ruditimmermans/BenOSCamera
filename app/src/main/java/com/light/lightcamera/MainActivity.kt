@@ -376,9 +376,8 @@ class MainActivity : AppCompatActivity() {
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.type = "image/*"
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         try {
-            startActivity(Intent.createChooser(intent, getString(R.string.open_with)))
+            startActivity(intent)
         } catch (e: Exception) {
             Toast.makeText(this, getString(R.string.no_app_to_open_photo), Toast.LENGTH_SHORT).show()
         }
