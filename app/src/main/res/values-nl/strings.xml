@@ -88,4 +88,6 @@
     <string name="category_appearance">Uiterlijk</string>
     <string name="category_info">Info</string>
     <string name="about_summary">App-versie en licentie-informatie</string>
+    <string name="about_support_header">Ondersteuning &amp; Ontwikkeling</string>
+    <string name="about_legal_header">Juridische Informatie</string>
 </resources>

@@ -15,8 +15,10 @@ class AboutActivity : AppCompatActivity() {
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.about)
+        binding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        binding.toolbar.setNavigationOnClickListener { finish() }
 
         val versionName = try {
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
@@ -53,10 +55,5 @@ class AboutActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.no_app_to_open_url, Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
     }
 }

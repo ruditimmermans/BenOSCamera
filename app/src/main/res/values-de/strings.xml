@@ -107,4 +107,6 @@
     <string name="category_appearance">Erscheinungsbild</string>
     <string name="category_info">Info</string>
     <string name="about_summary">App-Version und Lizenzinformationen</string>
+    <string name="about_support_header">Support &amp; Entwicklung</string>
+    <string name="about_legal_header">Rechtliche Informationen</string>
 </resources>

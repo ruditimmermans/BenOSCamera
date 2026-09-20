@@ -7,18 +7,21 @@
             app:defaultValue="0"
             app:entries="@array/aspect_ratios"
             app:entryValues="@array/aspect_ratio_values"
+            app:icon="@drawable/ic_camera_alt"
             app:key="aspect_ratio"
             app:title="@string/aspect_ratio_title"
             app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
             app:defaultValue="false"
+            app:icon="@drawable/ic_camera"
             app:key="tap_to_take_photo"
             app:title="@string/tap_to_take_photo_title"
             app:summary="@string/tap_to_take_photo_summary" />
 
         <SwitchPreferenceCompat
             app:defaultValue="true"
+            app:icon="@drawable/ic_videocam"
             app:key="auto_zoom"
             app:title="@string/auto_zoom_title"
             app:summary="@string/auto_zoom_summary" />
@@ -27,6 +30,7 @@
             app:defaultValue="internal"
             app:entries="@array/storage_locations"
             app:entryValues="@array/storage_location_values"
+            app:icon="@drawable/ic_gallery"
             app:key="storage_location"
             app:title="@string/storage_location_title"
             app:summary="@string/storage_location_summary"
@@ -37,6 +41,7 @@
     <PreferenceCategory app:title="@string/category_appearance">
 
         <Preference
+            app:icon="@drawable/ic_palette"
             app:key="button_color"
             app:summary="@string/button_color_summary"
             app:title="@string/button_color_title" />
@@ -46,13 +51,16 @@
     <PreferenceCategory app:title="@string/category_info">
         <SwitchPreferenceCompat
             app:defaultValue="true"
+            app:icon="@drawable/ic_update"
             app:key="auto_check_updates"
             app:summary="@string/auto_check_updates_summary"
             app:title="@string/auto_check_updates_title" />
         <Preference
+            app:icon="@drawable/ic_update"
             app:key="check_for_updates"
             app:title="@string/check_for_updates" />
         <Preference
+            app:icon="@drawable/ic_info_outline"
             app:key="about"
             app:summary="@string/about_summary"
             app:title="@string/about">

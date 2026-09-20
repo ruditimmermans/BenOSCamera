@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!-- Primary Colors -->
+    <color name="primary">#2D5AF0</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="primaryContainer">#DCE1FF</color>
+    <color name="onPrimaryContainer">#001552</color>
+
+    <!-- Secondary Colors -->
+    <color name="secondary">#5A5D72</color>
+    <color name="onSecondary">#FFFFFF</color>
+    <color name="secondaryContainer">#DFE1F9</color>
+    <color name="onSecondaryContainer">#171A2C</color>
+
+    <!-- Tertiary Colors -->
+    <color name="tertiary">#76546E</color>
+    <color name="onTertiary">#FFFFFF</color>
+    <color name="tertiaryContainer">#FFD7F3</color>
+    <color name="onTertiaryContainer">#2D1229</color>
+
+    <!-- Neutral Colors -->
+    <color name="surface">#FEFBFF</color>
+    <color name="onSurface">#1B1B1F</color>
+    <color name="surfaceVariant">#E2E2EC</color>
+    <color name="onSurfaceVariant">#45464F</color>
+    <color name="outline">#757780</color>
+
+    <!-- Legacy / Utility -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

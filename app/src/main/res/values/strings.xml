@@ -108,4 +108,6 @@
     <string name="category_appearance">Appearance</string>
     <string name="category_info">Info</string>
     <string name="about_summary">App version and license information</string>
+    <string name="about_support_header">Support &amp; Development</string>
+    <string name="about_legal_header">Legal Information</string>
 </resources>
