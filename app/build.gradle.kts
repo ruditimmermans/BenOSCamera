@@ -1,4 +1,4 @@
-val appVersionName = "2.2"
+val appVersionName = "2.3"
 
 plugins {
     alias(libs.plugins.android.application)
@@ -17,7 +17,7 @@ android {
         applicationId = "com.light.lightcamera"
         minSdk = 26
         targetSdk = 37
-        versionCode = 13
+        versionCode = 14
         versionName = appVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
