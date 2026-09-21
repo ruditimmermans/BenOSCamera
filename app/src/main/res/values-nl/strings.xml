@@ -22,8 +22,8 @@
     <string name="permission_denied">Machtigingen niet verleend door de gebruiker.</string>
     <string name="donate">Doneer aan BenOS</string>
     <string name="donate_url">https://ko-fi.com/ben9412345</string>
-    <string name="donate_paypal">Doneer aan de ontwikkelaar via PayPal</string>
-    <string name="donate_paypal_url">https://www.paypal.com/paypalme/benoscamera</string>
+    <string name="donate_paypal">Steun de ontwikkelaar op Ko-fi</string>
+    <string name="donate_paypal_url">https://ko-fi.com/ruditimmermans</string>
     <string name="report_issues">Problemen melden</string>
     <string name="report_issues_url">https://github.com/ruditimmermans/BenOSCamera/issues</string>
     <string name="open_with">Openen met</string>

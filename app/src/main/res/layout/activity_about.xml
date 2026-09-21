@@ -125,7 +125,7 @@
                         android:padding="16dp"
                         android:text="@string/donate_paypal"
                         android:textColor="?attr/colorOnSurface"
-                        app:icon="@drawable/ic_paypal"
+                        app:icon="@drawable/ic_kofi"
                         app:iconTint="?attr/colorPrimary" />
 
                     <View
