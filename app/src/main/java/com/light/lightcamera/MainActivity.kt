@@ -6,13 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.view.GestureDetector
-import android.view.KeyEvent
-import android.view.ScaleGestureDetector
-import android.view.View
-import android.view.MotionEvent
-import android.view.InputDevice
-import android.view.WindowManager
+import android.view.*
 import android.widget.SeekBar
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -20,6 +14,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.OrientationEventListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -62,12 +57,16 @@ class MainActivity : AppCompatActivity() {
     private var lastPhotoTime = 0L
     private var isZoomSeekBarTouching = false
 
+    private var orientationEventListener: OrientationEventListener? = null
+    private var currentRotationDegrees = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
         loadSettings()
+        setupOrientationListener()
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -141,6 +140,74 @@ class MainActivity : AppCompatActivity() {
         if (oldFlash != flashMode || oldRatio != screenAspectRatio) {
             startCamera()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        orientationEventListener?.enable()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        orientationEventListener?.disable()
+    }
+
+    private fun setupOrientationListener() {
+        orientationEventListener = object : OrientationEventListener(this) {
+            override fun onOrientationChanged(orientation: Int) {
+                if (orientation == ORIENTATION_UNKNOWN) return
+
+                val rotation = when (orientation) {
+                    in 45 until 135 -> Surface.ROTATION_270
+                    in 135 until 225 -> Surface.ROTATION_180
+                    in 225 until 315 -> Surface.ROTATION_90
+                    else -> Surface.ROTATION_0
+                }
+
+                val rotationDegrees = when (rotation) {
+                    Surface.ROTATION_0 -> 0
+                    Surface.ROTATION_90 -> 270
+                    Surface.ROTATION_180 -> 180
+                    Surface.ROTATION_270 -> 90
+                    else -> 0
+                }
+
+                if (rotationDegrees != currentRotationDegrees) {
+                    currentRotationDegrees = rotationDegrees
+                    updateUiRotation(rotationDegrees)
+                    
+                    // Update camera target rotation
+                    imageCapture?.targetRotation = rotation
+                    videoCapture?.targetRotation = rotation
+                }
+            }
+        }
+    }
+
+    private fun updateUiRotation(degrees: Int) {
+        val rotation = (-degrees).toFloat()
+        
+        val viewsToRotate = listOf(
+            viewBinding.qrButton,
+            viewBinding.switchCameraButton,
+            viewBinding.flashButton,
+            viewBinding.galleryButton,
+            viewBinding.videoCaptureButton,
+            viewBinding.settingsButton
+        )
+
+        viewsToRotate.forEach { view ->
+            view.animate()
+                .rotation(rotation)
+                .setDuration(300)
+                .start()
+        }
+
+        // Also rotate the FAB icon specifically
+        viewBinding.imageCaptureButton.animate()
+            .rotation(rotation)
+            .setDuration(300)
+            .start()
     }
 
     override fun onRequestPermissionsResult(
@@ -547,10 +614,22 @@ class MainActivity : AppCompatActivity() {
                 .build()
             videoCapture = VideoCapture.withOutput(recorder)
 
+            val initialRotation = when (currentRotationDegrees) {
+                90 -> Surface.ROTATION_270
+                180 -> Surface.ROTATION_180
+                270 -> Surface.ROTATION_90
+                else -> Surface.ROTATION_0
+            }
+
             imageCapture = ImageCapture.Builder()
                 .setTargetAspectRatio(screenAspectRatio)
                 .setFlashMode(flashMode)
+                .setTargetRotation(initialRotation)
                 .build()
+
+            // Update video capture rotation if possible, but VideoCapture builder is different
+            // Actually VideoCapture.withOutput returns a VideoCapture which has setTargetRotation
+            videoCapture?.targetRotation = initialRotation
 
             val imageAnalyzer = ImageAnalysis.Builder()
                 .setTargetAspectRatio(screenAspectRatio)
