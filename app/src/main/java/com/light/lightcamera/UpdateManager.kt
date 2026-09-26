@@ -91,14 +91,14 @@ class UpdateManager(private val context: Context) {
     }
 
     fun downloadAndInstallUpdate(url: String, version: String) {
-        val destination = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "BenOSCamera-v$version.apk")
+        val destination = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "BenOSCamera-v$version.apk")
         if (destination.exists()) destination.delete()
 
         val request = DownloadManager.Request(Uri.parse(url))
             .setTitle(context.getString(R.string.app_name))
             .setDescription("Downloading update v$version")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setDestinationUri(Uri.fromFile(destination))
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "BenOSCamera-v$version.apk")
             .setAllowedOverMetered(true)
             .setAllowedOverRoaming(true)
 
