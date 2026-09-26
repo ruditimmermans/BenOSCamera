@@ -118,14 +118,23 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val result = updateManager.checkForUpdates()
             if (result is UpdateManager.UpdateResult.NewVersionAvailable) {
-                MaterialAlertDialogBuilder(this@MainActivity)
+                val dialog = MaterialAlertDialogBuilder(this@MainActivity)
                     .setTitle(R.string.check_for_updates)
                     .setMessage(getString(R.string.update_available, result.version))
                     .setPositiveButton(R.string.download_update) { _, _ ->
                         updateManager.downloadAndInstallUpdate(result.downloadUrl, result.version)
                     }
                     .setNegativeButton(android.R.string.cancel, null)
-                    .show()
+                    .create()
+
+                dialog.window?.let { window ->
+                    window.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL)
+                    val layoutParams = window.attributes
+                    layoutParams.y = (32 * resources.displayMetrics.density).toInt()
+                    window.attributes = layoutParams
+                }
+
+                dialog.show()
             }
         }
     }

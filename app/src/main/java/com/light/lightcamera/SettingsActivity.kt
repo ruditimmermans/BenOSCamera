@@ -59,14 +59,23 @@ class SettingsActivity : AppCompatActivity() {
                 
                 when (result) {
                     is UpdateManager.UpdateResult.NewVersionAvailable -> {
-                        MaterialAlertDialogBuilder(requireContext())
+                        val dialog = MaterialAlertDialogBuilder(requireContext())
                             .setTitle(R.string.check_for_updates)
                             .setMessage(getString(R.string.update_available, result.version))
                             .setPositiveButton(R.string.download_update) { _, _ ->
                                 updateManager.openDownloadUrl(result.downloadUrl)
                             }
                             .setNegativeButton(android.R.string.cancel, null)
-                            .show()
+                            .create()
+
+                        dialog.window?.let { window ->
+                            window.setGravity(android.view.Gravity.TOP or android.view.Gravity.CENTER_HORIZONTAL)
+                            val layoutParams = window.attributes
+                            layoutParams.y = (32 * resources.displayMetrics.density).toInt()
+                            window.attributes = layoutParams
+                        }
+
+                        dialog.show()
                     }
                     is UpdateManager.UpdateResult.UpToDate -> {
                         Toast.makeText(requireContext(), R.string.update_not_available, Toast.LENGTH_SHORT).show()
