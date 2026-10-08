@@ -179,4 +179,6 @@
         <item>3</item>
         <item>5</item>
     </string-array>
+    <string name="qr_copied_to_clipboard">Copied to clipboard</string>
+    <string name="qr_clip_label">QR code</string>
 </resources>

@@ -66,6 +66,21 @@
             </intent-filter>
         </activity>
 
+        <!-- QR code to clipboard, for other apps such as the BenOS keyboard. Own task so that
+             finishing returns to the caller; kept out of recents. -->
+        <activity
+            android:name=".QrToClipboardActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
+            android:theme="@style/Theme.LightCamera.NoActionBar">
+            <intent-filter>
+                <action android:name="com.light.lightcamera.action.SCAN_QR_TO_CLIPBOARD" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".AboutActivity"
             android:label="@string/about"

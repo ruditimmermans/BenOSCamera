@@ -2,6 +2,8 @@ package com.light.lightcamera
 
 import android.Manifest
 import android.app.KeyguardManager
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -44,7 +46,13 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
+    // True for the QR-to-clipboard entry point (QrToClipboardActivity). In that mode the first
+    // code decoded is copied to the clipboard and the activity finishes, which returns to the
+    // task that launched it. Capture, recording, gallery and settings are unavailable.
+    protected open val qrToClipboardMode: Boolean = false
+    private var qrCopied = false
+
     private lateinit var viewBinding: ActivityMainBinding
     private var imageCapture: ImageCapture? = null
     private var videoCapture: VideoCapture<Recorder>? = null
@@ -130,7 +138,38 @@ class MainActivity : AppCompatActivity() {
         updateFlashIcon()
         setupZoom()
 
-        checkForUpdates()
+        if (qrToClipboardMode) {
+            setupQrToClipboardMode()
+        } else {
+            checkForUpdates()
+        }
+    }
+
+    private fun setupQrToClipboardMode() {
+        qrScannerEnabled = true
+        listOf(
+            viewBinding.imageCaptureButton,
+            viewBinding.videoCaptureButton,
+            viewBinding.screenRecordButton,
+            viewBinding.galleryButton,
+            viewBinding.settingsButton,
+            viewBinding.qrButton
+        ).forEach { it.visibility = View.GONE }
+    }
+
+    // Copies the decoded text, reports it, and closes the scanner. Guarded so that frames already
+    // in flight when the first code is decoded cannot copy a second value.
+    private fun copyToClipboardAndFinish(value: String) {
+        if (qrCopied) return
+        qrCopied = true
+        qrScannerEnabled = false
+        runOnUiThread {
+            val clipboard = getSystemService(ClipboardManager::class.java)
+            val clip = ClipData.newPlainText(getString(R.string.qr_clip_label), value)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this, R.string.qr_copied_to_clipboard, Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 
     private fun isPhotoCaptureIntent(): Boolean {
@@ -530,6 +569,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
+        if (qrToClipboardMode) return
         val currentTime = System.currentTimeMillis()
         if (currentTime - lastPhotoTime < 1000) return
         lastPhotoTime = currentTime
@@ -912,6 +952,11 @@ class MainActivity : AppCompatActivity() {
                 .addOnSuccessListener { barcodes ->
                     for (barcode in barcodes) {
                         val rawValue = barcode.rawValue ?: continue
+
+                        if (qrToClipboardMode) {
+                            copyToClipboardAndFinish(rawValue)
+                            break
+                        }
 
                         if (barcode.valueType == Barcode.TYPE_URL) {
                             val url = barcode.url?.url
